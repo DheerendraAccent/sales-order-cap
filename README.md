@@ -44,11 +44,16 @@ cds watch
 deploys an **in-memory SQLite** database and loads the CSV sample data on every
 restart. The terminal prints the service endpoints.
 
-- Service root:   http://localhost:4004/odata/v4/sales
-- Metadata:       http://localhost:4004/odata/v4/sales/$metadata
-- Fiori preview:  open http://localhost:4004 → **Fiori preview** link next to
-  `SalesOrders`, or run the bundled app at
-  http://localhost:4004/salesorders/webapp/index.html
+- Service root:    http://localhost:4004/odata/v4/sales
+- Metadata:        http://localhost:4004/odata/v4/sales/$metadata
+- Fiori preview:   open http://localhost:4004 → **Fiori preview** link next to
+  `SalesOrders` (CAP's auto-generated, zero-config UI — always works locally)
+- **App (direct):**     http://localhost:4004/salesorders/webapp/index.html
+- **App (Launchpad):**  http://localhost:4004/flp.html  ← tile-based Fiori Launchpad
+
+> Note on UI5 source: the app (`index.html`) and the Launchpad (`flp.html`) load UI5
+> from `https://sapui5.hana.ondemand.com` — the **same CDN CAP's Fiori preview uses** —
+> so the app renders wherever the preview does. CAP does not serve UI5 locally.
 
 To persist to a file-based DB instead of in-memory:
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sales Orders - Fiori Launchpad</title>
+
+  <!-- 1) Launchpad sandbox config: register the app as a tile -->
+  <script type="text/javascript">
+    window["sap-ushell-config"] = {
+      defaultRenderer: "fiori2",
+      renderers: {
+        fiori2: {
+          componentData: {
+            config: {
+              enableSearch: false,
+              rootIntent: "Shell-home"
+            }
+          }
+        }
+      },
+      applications: {
+        "SalesOrders-manage": {
+          title: "Manage Sales Orders",
+          description: "List Report / Object Page",
+          icon: "sap-icon://sales-order",
+          additionalInformation: "SAPUI5.Component=salesorders",
+          applicationType: "URL",
+          url: "/salesorders/webapp",
+          navigationMode: "embedded"
+        }
+      }
+    };
+  </script>
+
+  <!-- 2) Launchpad sandbox bootstrap (same CDN as the CAP Fiori preview) -->
+  <script src="https://sapui5.hana.ondemand.com/test-resources/sap/ushell/bootstrap/sandbox.js"></script>
+
+  <!-- 3) UI5 core -->
+  <script
+    id="sap-ui-bootstrap"
+    src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+    data-sap-ui-libs="sap.m, sap.ushell, sap.fe.templates"
+    data-sap-ui-theme="sap_horizon"
+    data-sap-ui-compatVersion="edge"
+    data-sap-ui-async="true"
+    data-sap-ui-frameOptions="allow"
+    data-sap-ui-bindingSyntax="complex"
+    data-sap-ui-resourceroots='{"salesorders": "/salesorders/webapp"}'
+    data-sap-ui-oninit="module:sap/ushell/bootstrap/common">
+  </script>
+</head>
+<body class="sapUiBody" id="content"></body>
+</html>
