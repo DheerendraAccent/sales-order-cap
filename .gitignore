@@ -1,0 +1,10 @@
+node_modules/
+gen/
+*.db
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+.env
+dist/
+*.log
+compile.err

@@ -1,0 +1,59 @@
+### Sales Service – CRUD smoke tests (VS Code REST Client / IntelliJ HTTP client)
+@host = http://localhost:4004
+@svc  = {{host}}/odata/v4/sales
+
+### 1. Read all Sales Orders
+GET {{svc}}/SalesOrders
+
+### 2. Read one order with its items (deep read)
+GET {{svc}}/SalesOrders(11111111-1111-1111-1111-111111111001)?$expand=Items
+
+### 3. $search + $filter (what the List Report issues)
+GET {{svc}}/SalesOrders?$search=Acme&$filter=Status eq 'Completed'&$orderby=OrderDate desc
+
+### 4. DEEP INSERT – create an order together with its items in one call
+# TotalAmount and each NetAmount are calculated by the service (don't send them).
+POST {{svc}}/SalesOrders
+Content-Type: application/json
+
+{
+  "SalesOrderNo": "SO-2001",
+  "CustomerID": "CUST-009",
+  "CustomerName": "Wayne Enterprises",
+  "OrderDate": "2026-06-01",
+  "Status": "New",
+  "Currency": "USD",
+  "Items": [
+    { "ItemNo": 10, "ProductID": "PROD-900", "ProductName": "Batmobile Tire", "Quantity": 4, "UnitPrice": 250.00, "Currency": "USD" },
+    { "ItemNo": 20, "ProductID": "PROD-901", "ProductName": "Grappling Hook", "Quantity": 2, "UnitPrice": 120.00, "Currency": "USD" }
+  ]
+}
+
+### 5. Validation – rejected because Quantity <= 0 (expect HTTP 400)
+POST {{svc}}/SalesOrders
+Content-Type: application/json
+
+{
+  "SalesOrderNo": "SO-2002",
+  "CustomerName": "Bad Qty Co",
+  "Items": [ { "ItemNo": 10, "ProductID": "P1", "ProductName": "X", "Quantity": 0, "UnitPrice": 10 } ]
+}
+
+### 6. Validation – rejected because SalesOrderNo already exists (expect HTTP 400)
+POST {{svc}}/SalesOrders
+Content-Type: application/json
+
+{ "SalesOrderNo": "SO-1001", "CustomerName": "Dup Co" }
+
+### 7. Update a header field (PATCH)
+PATCH {{svc}}/SalesOrders(11111111-1111-1111-1111-111111111003)
+Content-Type: application/json
+
+{ "Status": "In Process" }
+
+### 8. Delete an order (cascades to its items via composition)
+DELETE {{svc}}/SalesOrders(11111111-1111-1111-1111-111111111005)
+
+### 9. Value-help collections
+GET {{svc}}/OrderStatus
+GET {{svc}}/Currencies

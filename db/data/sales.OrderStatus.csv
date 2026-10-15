@@ -1,0 +1,6 @@
+code;name;descr
+New;New;Order created, not yet processed
+In Process;In Process;Order is being processed
+Completed;Completed;Order fully delivered and invoiced
+Blocked;Blocked;Order blocked (e.g. credit hold)
+Cancelled;Cancelled;Order cancelled

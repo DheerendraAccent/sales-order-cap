@@ -1,0 +1,41 @@
+{
+  "name": "sales-order-cap",
+  "version": "1.0.0",
+  "description": "SAP CAP project managing Sales Orders and Sales Order Items with SAP Fiori Elements",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@sap/cds": "^10",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^3",
+    "better-sqlite3": "^13",
+    "@sap/cds-dk": "^10"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch": "cds watch",
+    "build": "cds build --production",
+    "deploy": "cds deploy"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "url": ":memory:"
+        }
+      },
+      "auth": {
+        "kind": "mocked-auth"
+      }
+    },
+    "fiori": {
+      "preview": true
+    }
+  }
+}

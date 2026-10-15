@@ -1,0 +1,85 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "salesorders",
+    "type": "application",
+    "title": "Manage Sales Orders",
+    "description": "List Report / Object Page for Sales Orders",
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/sales/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": { "desktop": true, "tablet": true, "phone": true }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.120.0",
+      "libs": {
+        "sap.fe.templates": {}
+      }
+    },
+    "models": {
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      }
+    },
+    "routing": {
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "SalesOrdersList",
+          "target": "SalesOrdersList"
+        },
+        {
+          "pattern": "SalesOrders({key}):?query:",
+          "name": "SalesOrdersObjectPage",
+          "target": "SalesOrdersObjectPage"
+        }
+      ],
+      "targets": {
+        "SalesOrdersList": {
+          "type": "Component",
+          "id": "SalesOrdersList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "entitySet": "SalesOrders",
+              "variantManagement": "Page",
+              "navigation": {
+                "SalesOrders": {
+                  "detail": { "route": "SalesOrdersObjectPage" }
+                }
+              }
+            }
+          }
+        },
+        "SalesOrdersObjectPage": {
+          "type": "Component",
+          "id": "SalesOrdersObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "entitySet": "SalesOrders",
+              "navigation": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
