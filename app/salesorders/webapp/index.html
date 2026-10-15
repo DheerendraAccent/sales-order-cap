@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manage Sales Orders</title>
-  <!--
-    UI5 is loaded from the same CDN that CAP's built-in Fiori preview uses
-    (sapui5.hana.ondemand.com), so this app renders wherever the preview does.
-  -->
+  <style>
+    html, body, #content { height: 100%; margin: 0; }
+  </style>
+  <!-- UI5 from the same CDN as CAP's (working) Fiori preview -->
   <script
     id="sap-ui-bootstrap"
     src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
@@ -22,12 +22,12 @@
   </script>
 </head>
 <body class="sapUiBody">
-  <div
+  <div id="content"
     data-sap-ui-component
     data-name="salesorders"
     data-id="container"
-    data-settings='{"id":"salesorders"}'
-    style="height: 100%">
+    data-height="100%"
+    data-settings='{"id":"salesorders"}'>
   </div>
 </body>
 </html>

@@ -26,19 +26,21 @@
         "sap.fe.templates": {}
       }
     },
+    "contentDensities": { "compact": true, "cozy": true },
     "models": {
       "": {
         "dataSource": "mainService",
         "preload": true,
         "settings": {
-          "synchronizationMode": "None",
           "operationMode": "Server",
           "autoExpandSelect": true,
-          "earlyRequests": true
+          "earlyRequests": true,
+          "groupId": "$auto"
         }
       }
     },
     "routing": {
+      "config": {},
       "routes": [
         {
           "pattern": ":?query:",
@@ -58,7 +60,7 @@
           "name": "sap.fe.templates.ListReport",
           "options": {
             "settings": {
-              "entitySet": "SalesOrders",
+              "contextPath": "/SalesOrders",
               "variantManagement": "Page",
               "navigation": {
                 "SalesOrders": {
@@ -74,8 +76,7 @@
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
-              "entitySet": "SalesOrders",
-              "navigation": {}
+              "contextPath": "/SalesOrders"
             }
           }
         }
